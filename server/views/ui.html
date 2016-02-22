@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>RMS Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Fav and touch icons -->
+    <link rel="icon" sizes="144x144" href="/images/logo144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/logo144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/logo114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/logo72.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/logo57.png">
+    <link rel="shortcut icon" href="/images/favicon.ico"/>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='/stylesheets/mystyle.css'>
+</head>
+<body>
+<div class="loading-overlay" ng-show="isLoading">
+    <div class="loader"></div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-top navbar-rms" ng-controller="MenuCtrl">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" ng-click="toggle_menu()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <button type="button" class="navbar-toggle collapsed toggle-chat" ng-click="toggle_chat()">
+                <i class="glyphicon glyphicon-envelope"></i>
+            </button>
+            <a class="navbar-brand navbar-logo" href="#"><img src="/images/logo-small.png"></a>
+        </div>
+        <div class="collapse navbar-collapse side-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#/product"><i class="glyphicon glyphicon-glass"></i>&nbsp PRODUCT</a></li>
+                <li><a href="#/note"><i class="glyphicon glyphicon-th-list"></i>&nbsp NOTE</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href ng-click="toggle_chat()"><i class="glyphicon glyphicon-envelope"></i>&nbsp CHAT ROOM</a></li>
+                <li><a href="#/user"><i class="glyphicon glyphicon-user"></i>&nbsp USER</a></li>
+                <li><a href="#/logout"><i class="glyphicon glyphicon-log-out"></i>&nbspLOGOUT</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>  
+<div class="nav-side-bar navbar-default" ng-class="{'in':isToggleMenu}">
+    <nav role="navigation" class="navbar-collapse">
+        <ul class="nav navbar-nav side-menu">
+            <li><a href="#/product"><i class="glyphicon glyphicon-glass"></i>&nbsp PRODUCT</a></li>
+            <li><a href="#/note"><i class="glyphicon glyphicon-list"></i>&nbsp NOTE</a></li>
+        </ul>
+        <hr/>
+        <ul class="nav navbar-nav side-menu">
+            <li><a href="#/user"><i class="glyphicon glyphicon-user"></i>&nbsp USER</a></li>
+            <li><a href="#/logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp LOGOUT</a></li>
+        </ul>
+    </nav>
+</div>
+<div ng-view></div>
+<div class="chatbox-container" ng-class="{'in':isChat}" ng-controller="ChatCtrl">
+    <div class="chatbox-header">
+        <button class="btn btn-sm rms-round-btn rms-btn-danger pull-right" ng-click="close_chat()">
+            <i class="glyphicon glyphicon-remove"></i>
+        </button>
+    </div>
+    <div class="chat-content">
+        <div class="chat-message-box" id="msg_box">
+        </div>
+    </div>
+    <div class="chatbox-form">
+        <form ng-submit="send_text()">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Message..." ng-model="chat.text">
+                <span class="input-group-btn">
+                    <button class="btn rms-btn-primary" type="submit">SEND</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+<script src='/bower_components/angular/angular.js'></script>
+<script src='/bower_components/angular-route/angular-route.js'></script>
+<script src='/bower_components/angular-cookies/angular-cookies.js'></script>
+<script src='/bower_components/angular-animate/angular-animate.js'></script>
+<script src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js'></script>
+<script src='/bower_components/socket.io-client/socket.io.js'></script>
+
+<script src='/javascripts/myapp/myapp.js'></script>
+<script src='/javascripts/myapp/user/myapp-user.js'></script>
+<script src='/javascripts/myapp/note/myapp-note.js'></script>
+<script src='/javascripts/myapp/product/myapp-product.js'></script>
+</body>
+</html>
