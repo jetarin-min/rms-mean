@@ -18,7 +18,7 @@ var authenController= {
                     console.log("Invalid Login");
                 }
                 else {
-                    console.log("User "+user.name+" Logged In");
+                    console.log("User "+user.username+" Logged In");
                     var token = jwt.sign(user, config.secret+user._id,{
                         expiresInMinutes: 1440 // expires in 24 hours
                     });
